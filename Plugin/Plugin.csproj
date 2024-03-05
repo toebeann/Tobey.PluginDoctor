@@ -4,7 +4,7 @@
     <TargetFramework>net35</TargetFramework>
     <AssemblyName>Tobey.PluginDoctor</AssemblyName>
     <Description>A utility plugin to diagnose and solve common plugin issues</Description>
-    <Version>0.1</Version>
+    <Version>0.1.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <RootNamespace>Tobey.PluginDoctor</RootNamespace>

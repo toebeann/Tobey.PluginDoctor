@@ -1,0 +1,174 @@
+[Message:Plugin Doctor] |=====================  PLUGIN DOCTOR REPORT  =====================|
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   PLUGINS SKIPPED BY BEPINEX
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Custom Craft 2
+[Message:Plugin Doctor]       guid:     com.customcraft2sml.psmod
+[Message:Plugin Doctor]       version:  1.0.0.0
+[Message:Plugin Doctor]       filename: CustomCraft2SML.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     SYMPTOMS
+[Message:Plugin Doctor] 
+[Error  :Plugin Doctor]       plugin requires the following plugins which were not found:
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       - com.ahk1221.smlhelper
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     TREATMENT
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient should check the documentation of the plugin for
+[Message:Plugin Doctor]       information on its requirements and where to obtain them,
+[Message:Plugin Doctor]       and install them.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient is advised to consult with the developer of the
+[Message:Plugin Doctor]       plugin and/or the modding community if symptoms persist.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Custom Craft 3 (Purple Edition)
+[Message:Plugin Doctor]       guid:     com.mrpurple6411.CustomCraft3
+[Message:Plugin Doctor]       version:  1.0.0.4
+[Message:Plugin Doctor]       filename: CustomCraft3.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     SYMPTOMS
+[Message:Plugin Doctor] 
+[Error  :Plugin Doctor]       plugin requires the following plugins which were not found:
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       - com.snmodding.nautilus [>= 1.0.0.25]
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     TREATMENT
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient should check the documentation of the plugin for
+[Message:Plugin Doctor]       information on its requirements and where to obtain them,
+[Message:Plugin Doctor]       and install them.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient is advised to consult with the developer of the
+[Message:Plugin Doctor]       plugin and/or the modding community if symptoms persist.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   PLUGINS WHICH FAILED TO INITIALISE
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Seamoth Sprint
+[Message:Plugin Doctor]       guid:     com.ramune.SeamothSprint
+[Message:Plugin Doctor]       version:  1.0.0
+[Message:Plugin Doctor]       filename: SeamothSprint.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     SYMPTOMS
+[Message:Plugin Doctor] 
+[Error  :Plugin Doctor]       plugin threw an Exception during initialisation with the
+[Error  :Plugin Doctor]       following data:
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]         NullReferenceException: Object reference not set to an instance of an object
+[Message:Plugin Doctor]         Stack trace:
+[Message:Plugin Doctor]         SMLHelper.V2.Options.Attributes.ConfigFileMetadata`1[T].processMetadata () (at <21ae6a9b90624ee6a507253882306786>:0)
+[Message:Plugin Doctor]         SMLHelper.V2.Options.Attributes.ConfigFileMetadata`1[T].ProcessMetadata () (at <21ae6a9b90624ee6a507253882306786>:0)
+[Message:Plugin Doctor]         SMLHelper.V2.Options.Attributes.OptionsMenuBuilder`1[T]..ctor () (at <21ae6a9b90624ee6a507253882306786>:0)
+[Message:Plugin Doctor]         SMLHelper.V2.Handlers.OptionsPanelHandler.SMLHelper.V2.Interfaces.IOptionsPanelHandler.RegisterModOptions[T] () (at <21ae6a9b90624ee6a507253882306786>:0)
+[Message:Plugin Doctor]         SMLHelper.V2.Handlers.OptionsPanelHandler.RegisterModOptions[T] () (at <21ae6a9b90624ee6a507253882306786>:0)
+[Message:Plugin Doctor]         Ramune.SeamothSprint.SeamothSprint..cctor () (at <99ee2cbcdc18403a9c3fb20b3a5be640>:0)
+[Message:Plugin Doctor]         Rethrow as TypeInitializationException: The type initializer for 'Ramune.SeamothSprint.SeamothSprint' threw an exception.
+[Message:Plugin Doctor]         UnityEngine.GameObject:AddComponent(Type)
+[Message:Plugin Doctor]         BepInEx.Bootstrap.Chainloader:Start()
+[Message:Plugin Doctor]         SystemsSpawner:Awake()
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     TREATMENT
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       this symptom could indicate that the plugin is
+[Message:Plugin Doctor]       incompatible with the current version of the game.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient should check the documentation of the plugin for
+[Message:Plugin Doctor]       indications of whether the plugin is intended for use on a
+[Message:Plugin Doctor]       specific version of the game, and if so, patient should
+[Message:Plugin Doctor]       consult with the developer of the plugin and/or the
+[Message:Plugin Doctor]       modding community for advice on how to resolve this.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       otherwise, symptom may indicate that the plugin has a bug.
+[Message:Plugin Doctor]       patient should consult with the developer of the plugin
+[Message:Plugin Doctor]       and kindly ask them to address the issue.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   PLUGINS WITH POTENTIAL ISSUES
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Seamoth Sprint
+[Message:Plugin Doctor]       guid:     com.ramune.SeamothSprint
+[Message:Plugin Doctor]       version:  1.0.0
+[Message:Plugin Doctor]       filename: SeamothSprint.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     SYMPTOMS
+[Message:Plugin Doctor] 
+[Warning:Plugin Doctor]       plugin has missing assembly references:
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       - FMODUnity 0.0.0.0
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       this might mean the game or game version is incompatible,
+[Message:Plugin Doctor]       it could be indicative of missing requirements, or the
+[Message:Plugin Doctor]       missing references could simply be optional dependencies.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     ADVISEMENT
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient should check the documentation of the plugin for
+[Message:Plugin Doctor]       indications of whether the plugin is intended for use on a
+[Message:Plugin Doctor]       specific version of the game, and if so, patient should
+[Message:Plugin Doctor]       consult with the developer of the plugin and/or the
+[Message:Plugin Doctor]       modding community for advice on how to resolve this.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       otherwise, patient is advised to check the documentation
+[Message:Plugin Doctor]       of the plugin for its requirements and optional
+[Message:Plugin Doctor]       dependencies and where to obtain them, and install them.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient is advised to consult with the developer of the
+[Message:Plugin Doctor]       plugin and/or the modding community if symptoms persist.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   PLUGINS WITH NO DETECTED ISSUES
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Configuration Manager Tweaks
+[Message:Plugin Doctor]       guid:     Tobey.BepInEx.ConfigurationManagerTweaks.Subnautica
+[Message:Plugin Doctor]       version:  1.2
+[Message:Plugin Doctor]       filename: Tobey.BepInEx.ConfigurationManager.Subnautica.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Configuration Manager
+[Message:Plugin Doctor]       guid:     Tobey.BepInEx.ConfigurationManager.Subnautica
+[Message:Plugin Doctor]       version:  17.1
+[Message:Plugin Doctor]       filename: Tobey.BepInEx.ConfigurationManager.Subnautica.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - QModManager.LogFilter
+[Message:Plugin Doctor]       guid:     QModManager.LogFilter
+[Message:Plugin Doctor]       version:  4.4.4
+[Message:Plugin Doctor]       filename: QModInstaller.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - QMMLoader
+[Message:Plugin Doctor]       guid:     QModManager.QMMLoader
+[Message:Plugin Doctor]       version:  4.4.4
+[Message:Plugin Doctor]       filename: QModInstaller.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - UnityExplorer
+[Message:Plugin Doctor]       guid:     com.sinai.unityexplorer
+[Message:Plugin Doctor]       version:  4.9.0
+[Message:Plugin Doctor]       filename: UnityExplorer.BIE5.Mono.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - BepInEx Tweaks
+[Message:Plugin Doctor]       guid:     Tobey.BepInExTweaks.Subnautica
+[Message:Plugin Doctor]       version:  1.2.1
+[Message:Plugin Doctor]       filename: Tobey.BepInExTweaks.Subnautica.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Subnautica Config Handler
+[Message:Plugin Doctor]       guid:     Tobey.Subnautica.ConfigHandler
+[Message:Plugin Doctor]       version:  1.0.2
+[Message:Plugin Doctor]       filename: Tobey.Subnautica.ConfigHandler.Plugin.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - File Tree
+[Message:Plugin Doctor]       guid:     Tobey.FileTree
+[Message:Plugin Doctor]       version:  1.0.0
+[Message:Plugin Doctor]       filename: Tobey.FileTree.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Plugin Doctor
+[Message:Plugin Doctor]       guid:     Tobey.PluginDoctor
+[Message:Plugin Doctor]       version:  0.1.1
+[Message:Plugin Doctor]       filename: Tobey.PluginDoctor.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - SnapBuilder
+[Message:Plugin Doctor]       guid:     Tobey.SnapBuilder
+[Message:Plugin Doctor]       version:  2.4.0
+[Message:Plugin Doctor]       filename: Tobey.SnapBuilder.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Unity Audio Patcher
+[Message:Plugin Doctor]       guid:     Tobey.UnityAudio
+[Message:Plugin Doctor]       version:  2.0.1
+[Message:Plugin Doctor]       filename: Tobey.UnityAudio.Plugin.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor] |==================================================================|
