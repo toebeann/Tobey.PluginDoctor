@@ -20,7 +20,7 @@
   </PropertyGroup>
   
   <Target Name="ZipBuild" AfterTargets="AfterBuild">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="..\bin\zip\BepInEx\plugins\Tobey\PluginDoctor\" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="..\bin\zip\BepInEx\plugins\Tobey\Plugin Doctor\" />
     <ZipDirectory SourceDirectory="..\bin\zip\" DestinationFile="..\bin\$(RootNamespace).zip" Overwrite="true" />
   </Target>
 

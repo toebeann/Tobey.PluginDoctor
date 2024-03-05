@@ -15,7 +15,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <Target Name="ZipBuild" AfterTargets="AfterBuild">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="..\bin\zip\BepInEx\patchers\Tobey\PluginDoctor\" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="..\bin\zip\BepInEx\patchers\Tobey\Plugin Doctor\" />
     <ZipDirectory SourceDirectory="..\bin\zip\" DestinationFile="..\bin\$(RootNamespace).zip" Overwrite="true" />
   </Target>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
