@@ -643,7 +643,7 @@ public class Plugin : BaseUnityPlugin
             Logger.LogMessage(string.Empty);
         }
 
-        Logger.LogMessage("  PLUGINS WITH NO KNOWN ISSUES");
+        Logger.LogMessage("  PLUGINS WITH NO DETECTED ISSUES");
         Logger.LogMessage(string.Empty);
 
         foreach (var pluginInfo in AsymptomaticPlugins)
