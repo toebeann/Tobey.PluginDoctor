@@ -37,9 +37,10 @@
     
     however, i believe it will be worth the effort, as it would be extremely useful for users to immediately know that
     the reason a mod isn't working is because they are using it on the wrong game, or wrong game version. it won't
-    easily be possible to detect these kinds of issues outside the scope of `Awake` otherwise.
+    easily be possible to detect these kinds of issues outside the scope of plugin initialisation otherwise.
     
     an alternative could be to parse logs for errors about Type errors, but would need a large sample of relevant log
     messages, and it will likely not be foolproof, whereas analysing the assemblies I believe would have a much higher
-    success rate, and this would still be limited to Type errors within `Awake` unless we want to continue monitoring
-    log messages continously while the game is being played, which would impose an ongoing runtime performance cost.
+    success rate, and this would still be limited to Type errors during initialisation unless we want to continue
+    monitoring log messages continously while the game is being played, which would impose an ongoing runtime
+    performance cost.
