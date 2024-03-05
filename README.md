@@ -16,7 +16,7 @@ Plugin Doctor can diagnose and advise how to treat (and when to ignore) the foll
 -   plugins which failed during initialisation:
     -   the plugin was loaded before its requirements
     -   the plugin references assemblies which were not found
-    -   the plugin otherwise failed during its `Awake` method
+    -   the plugin otherwise failed during initialisation
 -   plugins with potential issues:
     -   the plugin references assemblies which were not found, but did not fail during its `Awake` method
     -   the plugin targets a potentially incompatible version of BepInEx

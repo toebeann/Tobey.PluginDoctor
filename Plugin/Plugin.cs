@@ -34,7 +34,7 @@ public class Plugin : BaseUnityPlugin
 
     private Dictionary<BepInEx.PluginInfo, object> failedPlugins_CouldNotBeInstantiated;
     private Dictionary<BepInEx.PluginInfo, IEnumerable<BepInEx.PluginInfo>> failedPlugins_MissingBepInDependencyAttributes;
-    private Dictionary<BepInEx.PluginInfo, object> failedPlugins_ThrewInAwake;
+    private Dictionary<BepInEx.PluginInfo, object> failedPlugins_ThrewInInit;
 
     private Dictionary<BepInEx.PluginInfo, IEnumerable<AssemblyName>> suspiciousPlugins_MissingReferences;
     private Dictionary<BepInEx.PluginInfo, Version> suspiciousPlugins_TargetsWrongBepInExVersion;
@@ -52,7 +52,7 @@ public class Plugin : BaseUnityPlugin
             .Concat(skippedPlugins_ReasonsUnknown ?? Enumerable.Empty<BepInEx.PluginInfo>())
             .Concat(failedPlugins_CouldNotBeInstantiated?.Keys ?? Enumerable.Empty<BepInEx.PluginInfo>())
             .Concat(failedPlugins_MissingBepInDependencyAttributes?.Keys ?? Enumerable.Empty<BepInEx.PluginInfo>())
-            .Concat(failedPlugins_ThrewInAwake?.Keys ?? Enumerable.Empty<BepInEx.PluginInfo>())
+            .Concat(failedPlugins_ThrewInInit?.Keys ?? Enumerable.Empty<BepInEx.PluginInfo>())
             .Concat(suspiciousPlugins_MissingReferences?.Keys ?? Enumerable.Empty<BepInEx.PluginInfo>())
             .Concat(suspiciousPlugins_TargetsWrongBepInExVersion?.Keys ?? Enumerable.Empty<BepInEx.PluginInfo>())
             .Distinct();
@@ -67,7 +67,7 @@ public class Plugin : BaseUnityPlugin
 
     private Dictionary<BepInEx.PluginInfo, IEnumerable<AssemblyName>> FailedPlugins_MissingReferences =>
         (suspiciousPlugins_MissingReferences ?? Enumerable.Empty<KeyValuePair<BepInEx.PluginInfo, IEnumerable<AssemblyName>>>())
-            .Where(entry => Patcher.PluginTypeNames_CouldNotBeInstantiated?.ContainsKey(entry.Key.TypeName) ?? false)
+            .Where(entry => Patcher.PluginMetadata_CouldNotBeInstantiated?.ContainsKey($"{entry.Key.Metadata.Name} {entry.Key.Metadata.Version}") ?? false)
             .ToDictionary(entry => entry.Key, entry => entry.Value);
 
     public IEnumerable<BepInEx.PluginInfo> FailedPlugins =>
@@ -75,7 +75,7 @@ public class Plugin : BaseUnityPlugin
             .Concat(FailedPlugins_MissingReferences.Keys)
             .Concat(failedPlugins_CouldNotBeInstantiated?.Keys ?? Enumerable.Empty<BepInEx.PluginInfo>())
             .Concat(failedPlugins_MissingBepInDependencyAttributes?.Keys ?? Enumerable.Empty<BepInEx.PluginInfo>())
-            .Concat(failedPlugins_ThrewInAwake?.Keys ?? Enumerable.Empty<BepInEx.PluginInfo>());
+            .Concat(failedPlugins_ThrewInInit?.Keys ?? Enumerable.Empty<BepInEx.PluginInfo>());
 
     private Dictionary<BepInEx.PluginInfo, IEnumerable<AssemblyName>> SuspiciousPlugins_MissingReferences =>
         (suspiciousPlugins_MissingReferences ?? Enumerable.Empty<KeyValuePair<BepInEx.PluginInfo, IEnumerable<AssemblyName>>>())
@@ -108,7 +108,7 @@ public class Plugin : BaseUnityPlugin
         skippedPlugins_ReasonsUnknown = null;
         failedPlugins_CouldNotBeInstantiated = null;
         failedPlugins_MissingBepInDependencyAttributes = null;
-        failedPlugins_ThrewInAwake = null;
+        failedPlugins_ThrewInInit = null;
         suspiciousPlugins_MissingReferences = null;
     }
 
@@ -258,7 +258,7 @@ public class Plugin : BaseUnityPlugin
                         if (pluginInfo.Instance == null)
                         {   // either the plugin was intentionally destroyed, or Unity failed to instantiate it which usually indicates missing assembly references
 
-                            if (Patcher.PluginTypeNames_CouldNotBeInstantiated?.TryGetValue(pluginInfo.TypeName, out var data) ?? false)
+                            if (Patcher.PluginMetadata_CouldNotBeInstantiated?.TryGetValue($"{pluginInfo.Metadata.Name} {pluginInfo.Metadata.Version}", out var data) ?? false)
                             {   // seems like Unity failed to instantiate the plugin
                                 // check if we already found missing references for this plugin
 
@@ -298,12 +298,12 @@ public class Plugin : BaseUnityPlugin
                         else if (!pluginInfo.Instance.enabled)
                         {   // either the plugin was intentionally disabled (by itself or otherwise), or an error was thrown in Awake
 
-                            if (Patcher.PluginTypeNames_ThrewInAwake?.TryGetValue(pluginInfo.TypeName, out var data) ?? false)
+                            if (Patcher.PluginMetadata_ThrewInInit?.TryGetValue($"{pluginInfo.Metadata.Name} {pluginInfo.Metadata.Version}", out var data) ?? false)
                             {   // looks like the plugin threw in Awake, without missing dependencies or missing references.
                                 // it's quite likely then that the plugin is not compatible with the game (or game version)
                                 // that the user is running.
 
-                                (failedPlugins_ThrewInAwake ??= []).Add(plugin, data);
+                                (failedPlugins_ThrewInInit ??= []).Add(plugin, data);
                             }
                             else
                             {   // looks like the plugin was intentionally disabled (by itself or otherwise), ignore it
@@ -532,11 +532,11 @@ public class Plugin : BaseUnityPlugin
                 Logger.LogMessage($"      plugin GUID(s).");
             }
 
-            if (failedPlugins_ThrewInAwake?.TryGetValue(pluginInfo, out var data) ?? false)
+            if (failedPlugins_ThrewInInit?.TryGetValue(pluginInfo, out var data) ?? false)
             {
                 Logger.LogMessage(string.Empty);
-                Logger.LogError($"      plugin threw an Exception during execution of its Awake");
-                Logger.LogError($"      method with the following data:");
+                Logger.LogError($"      plugin threw an Exception during initialisation with the");
+                Logger.LogError($"      following data:");
                 Logger.LogMessage(string.Empty);
                 foreach (var line in data.ToString().Trim().Split(['\n'], StringSplitOptions.RemoveEmptyEntries).Select(l => l.TrimEnd('\r')))
                 {
@@ -646,7 +646,7 @@ public class Plugin : BaseUnityPlugin
                 Logger.LogMessage($"      patient is advised to consult with the developer of the");
                 Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
             }
-            
+
             Logger.LogMessage(string.Empty);
         }
 

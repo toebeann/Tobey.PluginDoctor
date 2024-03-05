@@ -5,47 +5,54 @@ using System.Linq;
 namespace Tobey.PluginDoctor;
 internal sealed class GlobalLogListener : ILogListener
 {
-    private static string UNITY_AWAKE_THROW_MESSAGE_END =
-        """
-        UnityEngine.GameObject:AddComponent(Type)
-        BepInEx.Bootstrap.Chainloader:Start()
-        UnityEngine.Application:.cctor()
-        UWE.GameApplication:AppAwake()
-        """;
+    private string[] BEPINEX_PLUGIN_LOADING_PARTS = ["Loading [", "]"];
 
     private GlobalLogListener() { }
     public static GlobalLogListener Instance { get; private set; } = new();
 
-    public void Dispose()
-    {
-        UNITY_AWAKE_THROW_MESSAGE_END = null;
-        Instance = null;
-    }
+    public void Dispose() => Instance = null;
+
+    private string lastBepInExPluginLoad;
 
     public void LogEvent(object _, LogEventArgs logEventArgs)
     {
         var source = logEventArgs.Source;
         var level = logEventArgs.Level;
         var data = logEventArgs.Data;
-
-        if (source.SourceName != "Unity Log") return;
-
         var message = data.ToString().Trim();
+        var lines = message.Split(['\n'], StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim()).ToList();
 
-        if (level == LogLevel.Warning && message.StartsWith("The script '") && message.EndsWith("' could not be instantiated!"))
+        switch (source.SourceName)
         {
-            var split = message.Split('\'');
-            // the reason I'm not just grabbing split[1] is in case some weirdo includes an apostrophe in the name of their script
-            var pluginTypeName = string.Join("'", split.Skip(1).Take(split.Length - 2).ToArray());
+            case "BepInEx"
+            when level == LogLevel.Info && message.StartsWith(BEPINEX_PLUGIN_LOADING_PARTS.First()) && message.EndsWith(BEPINEX_PLUGIN_LOADING_PARTS.Last()):
 
-            (Patcher.PluginTypeNames_CouldNotBeInstantiated ??= []).Add(pluginTypeName, data);
-        }
-        else if (level == LogLevel.Error && message.EndsWith(UNITY_AWAKE_THROW_MESSAGE_END) && message.IndexOf("Stack trace:") is int stackTraceIndex && stackTraceIndex >= 0)
-        {
-            var split = message.Split(["Stack trace:", ".Awake () (at <", UNITY_AWAKE_THROW_MESSAGE_END], StringSplitOptions.RemoveEmptyEntries);
-            var pluginTypeName = split[1].Trim();
+                lastBepInExPluginLoad = message.Split(BEPINEX_PLUGIN_LOADING_PARTS, StringSplitOptions.RemoveEmptyEntries).SingleOrDefault();
 
-            (Patcher.PluginTypeNames_ThrewInAwake ??= []).Add(pluginTypeName, data);
+                break;
+
+            case "Unity Log"
+            when lastBepInExPluginLoad is not null && (!(Patcher.PluginMetadata_ThrewInInit?.ContainsKey(lastBepInExPluginLoad)) ?? true) &&
+                level == LogLevel.Warning && message.StartsWith("The script '") && message.EndsWith("' could not be instantiated!"):
+
+                (Patcher.PluginMetadata_CouldNotBeInstantiated ??= []).Add(lastBepInExPluginLoad, data);
+
+                lastBepInExPluginLoad = null;
+
+                break;
+
+            case "Unity Log"
+            when lastBepInExPluginLoad is not null && (!(Patcher.PluginMetadata_ThrewInInit?.ContainsKey(lastBepInExPluginLoad)) ?? true) &&
+                level == LogLevel.Error &&
+                lines.LastIndexOf("Stack trace:") is int stackTraceIndex && stackTraceIndex >= 0 &&
+                lines.LastIndexOf("UnityEngine.GameObject:AddComponent(Type)") is int addComponentIndex && addComponentIndex > stackTraceIndex &&
+                lines.LastIndexOf("BepInEx.Bootstrap.Chainloader:Start()") is int chainloaderStartIndex && chainloaderStartIndex > addComponentIndex:
+
+                (Patcher.PluginMetadata_ThrewInInit ??= []).Add(lastBepInExPluginLoad, data);
+
+                lastBepInExPluginLoad = null;
+
+                break;
         }
     }
 }

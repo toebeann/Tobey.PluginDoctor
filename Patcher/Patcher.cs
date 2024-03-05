@@ -11,8 +11,8 @@ public static class Patcher
     public static void Patch(AssemblyDefinition _) { }
     #endregion
 
-    internal static Dictionary<string, object> PluginTypeNames_CouldNotBeInstantiated;
-    internal static Dictionary<string, object> PluginTypeNames_ThrewInAwake;
+    internal static Dictionary<string, object> PluginMetadata_CouldNotBeInstantiated;
+    internal static Dictionary<string, object> PluginMetadata_ThrewInInit;
 
     public static void Initialize() => Logger.Listeners.Add(GlobalLogListener.Instance);
 }
