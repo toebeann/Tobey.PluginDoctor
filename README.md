@@ -13,6 +13,7 @@ Plugin Doctor can diagnose and advise how to treat (and when to ignore) the foll
     -   the game executable is considered incompatible by the developer of the plugin
     -   plugins marked as incompatible by the developer are installed
     -   requirements of the plugin are not installed or were skipped
+    -   the plugin was otherwise skipped
 -   plugins which failed during initialisation:
     -   the plugin was loaded before its requirements
     -   the plugin references assemblies which were not found
