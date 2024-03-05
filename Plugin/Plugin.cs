@@ -562,7 +562,7 @@ public class Plugin : BaseUnityPlugin
             if (failedPlugins_CouldNotBeInstantiated?.TryGetValue(pluginInfo, out data) ?? false)
             {
                 Logger.LogMessage(string.Empty);
-                Logger.LogError($"      plugin could not be instantiated by unity, with the");
+                Logger.LogError($"      plugin could not be instantiated by Unity, with the");
                 Logger.LogError($"      following data:");
                 Logger.LogError($"        ");
                 Logger.LogMessage(string.Empty);
