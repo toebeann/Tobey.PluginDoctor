@@ -602,14 +602,21 @@ public class Plugin : BaseUnityPlugin
                     Logger.LogMessage($"      - {missingReference.Name} {missingReference.Version}");
                 }
                 Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      this could be indicative of missing requirements, or they");
-                Logger.LogMessage($"      could simply be optional dependencies.");
+                Logger.LogMessage($"      this might mean the game or game version is incompatible,");
+                Logger.LogMessage($"      it could be indicative of missing requirements, or the");
+                Logger.LogMessage($"      missing references could simply be optional dependencies.");
                 Logger.LogMessage(string.Empty);
                 Logger.LogMessage($"    ADVISEMENT");
                 Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient is advised to check the documentation of the");
-                Logger.LogMessage($"      plugin for its requirements and optional dependencies and");
-                Logger.LogMessage($"      where to obtain them, and install them.");
+                Logger.LogMessage($"      patient should check the documentation of the plugin for");
+                Logger.LogMessage($"      indications of whether the plugin is intended for use on a");
+                Logger.LogMessage($"      specific version of the game, and if so, patient should");
+                Logger.LogMessage($"      consult with the developer of the plugin and/or the");
+                Logger.LogMessage($"      modding community for advice on how to resolve this.");
+                Logger.LogMessage(string.Empty);
+                Logger.LogMessage($"      otherwise, patient is advised to check the documentation");
+                Logger.LogMessage($"      of the plugin for its requirements and optional");
+                Logger.LogMessage($"      dependencies and where to obtain them, and install them.");
                 Logger.LogMessage(string.Empty);
                 Logger.LogMessage($"      patient is advised to consult with the developer of the");
                 Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
