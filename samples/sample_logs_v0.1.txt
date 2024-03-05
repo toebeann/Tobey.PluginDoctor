@@ -1,0 +1,121 @@
+[Message:Plugin Doctor] |=====================  PLUGIN DOCTOR REPORT  =====================|
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   PLUGINS SKIPPED BY BEPINEX
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Custom Craft 2
+[Message:Plugin Doctor]       guid:     com.customcraft2sml.psmod
+[Message:Plugin Doctor]       version:  1.0.0.0
+[Message:Plugin Doctor]       filename: CustomCraft2SML.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     SYMPTOMS
+[Message:Plugin Doctor] 
+[Error  :Plugin Doctor]       plugin requires the following plugins which were not found:
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       - com.ahk1221.smlhelper
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     TREATMENT
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient should check the documentation of the plugin for
+[Message:Plugin Doctor]       information on its requirements and where to obtain them,
+[Message:Plugin Doctor]       and install them.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient is advised to consult with the developer of the
+[Message:Plugin Doctor]       plugin and/or the modding community if symptoms persist.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Custom Craft 3 (Purple Edition)
+[Message:Plugin Doctor]       guid:     com.mrpurple6411.CustomCraft3
+[Message:Plugin Doctor]       version:  1.0.0.4
+[Message:Plugin Doctor]       filename: CustomCraft3.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     SYMPTOMS
+[Message:Plugin Doctor] 
+[Error  :Plugin Doctor]       plugin requires the following plugins which were not found:
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       - com.snmodding.nautilus [>= 1.0.0.25]
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     TREATMENT
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient should check the documentation of the plugin for
+[Message:Plugin Doctor]       information on its requirements and where to obtain them,
+[Message:Plugin Doctor]       and install them.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient is advised to consult with the developer of the
+[Message:Plugin Doctor]       plugin and/or the modding community if symptoms persist.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   PLUGINS WHICH FAILED TO INITIALISE
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Seamoth Sprint
+[Message:Plugin Doctor]       guid:     com.ramune.SeamothSprint
+[Message:Plugin Doctor]       version:  1.0.0
+[Message:Plugin Doctor]       filename: SeamothSprint.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     SYMPTOMS
+[Message:Plugin Doctor] 
+[Error  :Plugin Doctor]       plugin has missing assembly references:
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       - SMLHelper 2.15.0.1
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]     TREATMENT
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient should check the documentation of the plugin for
+[Message:Plugin Doctor]       information on its requirements and where to obtain them,
+[Message:Plugin Doctor]       and install them.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       additionally, patient is advised to reach out to the
+[Message:Plugin Doctor]       developer of the plugin and inform them that their plugin
+[Message:Plugin Doctor]       may be missing BepInDependency attribute(s), which could
+[Message:Plugin Doctor]       cause load order issues.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]       patient is advised to consult with the developer of the
+[Message:Plugin Doctor]       plugin and/or the modding community if symptoms persist.
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   PLUGINS WITH POTENTIAL ISSUES
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   PLUGINS WITH NO KNOWN ISSUES
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Configuration Manager Tweaks
+[Message:Plugin Doctor]       guid:     Tobey.BepInEx.ConfigurationManagerTweaks.Subnautica
+[Message:Plugin Doctor]       version:  1.2
+[Message:Plugin Doctor]       filename: Tobey.BepInEx.ConfigurationManager.Subnautica.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Configuration Manager
+[Message:Plugin Doctor]       guid:     Tobey.BepInEx.ConfigurationManager.Subnautica
+[Message:Plugin Doctor]       version:  17.1
+[Message:Plugin Doctor]       filename: Tobey.BepInEx.ConfigurationManager.Subnautica.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - UnityExplorer
+[Message:Plugin Doctor]       guid:     com.sinai.unityexplorer
+[Message:Plugin Doctor]       version:  4.9.0
+[Message:Plugin Doctor]       filename: UnityExplorer.BIE5.Mono.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - BepInEx Tweaks
+[Message:Plugin Doctor]       guid:     Tobey.BepInExTweaks.Subnautica
+[Message:Plugin Doctor]       version:  1.2.1
+[Message:Plugin Doctor]       filename: Tobey.BepInExTweaks.Subnautica.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Subnautica Config Handler
+[Message:Plugin Doctor]       guid:     Tobey.Subnautica.ConfigHandler
+[Message:Plugin Doctor]       version:  1.0.2
+[Message:Plugin Doctor]       filename: Tobey.Subnautica.ConfigHandler.Plugin.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - File Tree
+[Message:Plugin Doctor]       guid:     Tobey.FileTree
+[Message:Plugin Doctor]       version:  1.0.0
+[Message:Plugin Doctor]       filename: Tobey.FileTree.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Plugin Doctor
+[Message:Plugin Doctor]       guid:     Tobey.PluginDoctor
+[Message:Plugin Doctor]       version:  0.1
+[Message:Plugin Doctor]       filename: Tobey.PluginDoctor.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - SnapBuilder
+[Message:Plugin Doctor]       guid:     Tobey.SnapBuilder
+[Message:Plugin Doctor]       version:  2.4.0
+[Message:Plugin Doctor]       filename: Tobey.SnapBuilder.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor]   - Unity Audio Patcher
+[Message:Plugin Doctor]       guid:     Tobey.UnityAudio
+[Message:Plugin Doctor]       version:  2.0.0
+[Message:Plugin Doctor]       filename: Tobey.UnityAudio.Plugin.dll
+[Message:Plugin Doctor] 
+[Message:Plugin Doctor] |==================================================================|
