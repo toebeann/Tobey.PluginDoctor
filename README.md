@@ -29,9 +29,9 @@ In the future, it is planned for Plugin Doctor to offer to treat some of these s
 
 ## Installation
 
-Install it with the BepInEx mod manager of your choice, or just plop the contents of the downloaded .zip from
-[the releases page](https://github.com/toebeann/Tobey.PluginDoctor/releases) into your game folder (after installing
-[BepInEx](https://github.com/BepInEx/BepInEx), of course).
+Download the latest release from [the GitHub releases page](https://github.com/toebeann/Tobey.PluginDoctor/releases),
+then install it with the BepInEx mod manager of your choice, or just plop its contents into your game folder (after
+installing [BepInEx](https://github.com/BepInEx/BepInEx), of course).
 
 ## Usage
 
