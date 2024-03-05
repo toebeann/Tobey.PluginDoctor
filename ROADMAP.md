@@ -29,8 +29,8 @@
     
 -   implement a feature to analyse how a plugin interacts with the managed assemblies provided by the game, to detect
     if there are any compatibility issues between the types provided and the types expected. if it is performant enough,
-    enough, we could analyse every plugin assembly on start-up for these types of issues. otherwise, only analyse them
-    if it is suspected to be the cause of an issue, e.g. by offering to analyse specific assemblies only.
+    we could analyse every plugin assembly on start-up for these types of issues. otherwise, only analyse them if it is
+    suspected to be the cause of an issue, e.g. by offering to analyse specific assemblies only.
     
     this feature would require loading up Mono.Cecil and doing a bunch of complex meta-programming wizardry, so will
     likely be quite time-consuming and complicated to prototype and implement.
