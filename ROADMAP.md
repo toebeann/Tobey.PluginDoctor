@@ -2,11 +2,15 @@
 
 ## Short-term
 
-1. design and implement in-game GUI to display report to user in a nice format, with buttons to copy diagnoses,
+1. detect TypeInitializationException and similar during plugin initialisation as distinct to generic initialisation
+   issues, as an indicator that the user may be on an incompatible game/game version, or have an incompatible
+   dependency version installed.
+   
+2. design and implement in-game GUI to display report to user in a nice format, with buttons to copy diagnoses,
    treatments and advisements to the clipboard in markdown syntax for easy pasting into e.g. discord, github issues,
    etc.
    
-2. offer to treat the following types of issues:
+3. offer to treat the following types of issues:
    
     - mod developer forgot to include `BepInDependency` attribute in their plugin: we can attempt to fix this by
       patching the plugin .dll to have a `BepInDependency` attribute as needed with Mono.Cecil in a preloader patcher.
@@ -20,7 +24,7 @@
     the above treatments should be reversible, i.e. we should make backups of any .dlls before modifying them and
     offering to undo the patch at the user's request, especially in the case that symptoms persist with the plugin.
    
-3. design a serialization format to save report, likely as json, so that it can be loaded and parsed by external tools,
+4. design a serialization format to save report, likely as json, so that it can be loaded and parsed by external tools,
    e.g. vortex, discord bots, etc.
    
 ## Long-term
