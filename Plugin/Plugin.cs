@@ -639,6 +639,8 @@ public class Plugin : BaseUnityPlugin
                 Logger.LogMessage($"      patient is advised to consult with the developer of the");
                 Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
             }
+            
+            Logger.LogMessage(string.Empty);
         }
 
         Logger.LogMessage("  PLUGINS WITH NO KNOWN ISSUES");
