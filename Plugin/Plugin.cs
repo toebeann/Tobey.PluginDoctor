@@ -538,9 +538,9 @@ public class Plugin : BaseUnityPlugin
                 Logger.LogError($"      plugin threw an Exception during execution of its Awake");
                 Logger.LogError($"      method with the following data:");
                 Logger.LogMessage(string.Empty);
-                foreach (var line in data.ToString().Split('\n').Select(l => l.TrimEnd('\r')))
+                foreach (var line in data.ToString().Trim().Split(['\n'], StringSplitOptions.RemoveEmptyEntries).Select(l => l.TrimEnd('\r')))
                 {
-                    Logger.LogError($"        {line}");
+                    Logger.LogMessage($"        {line}");
                 }
                 Logger.LogMessage(string.Empty);
                 Logger.LogMessage($"    TREATMENT");
@@ -566,9 +566,9 @@ public class Plugin : BaseUnityPlugin
                 Logger.LogError($"      following data:");
                 Logger.LogError($"        ");
                 Logger.LogMessage(string.Empty);
-                foreach (var line in data.ToString().Split('\n').Select(l => l.TrimEnd('\r')))
+                foreach (var line in data.ToString().Trim().Split(['\n'], StringSplitOptions.RemoveEmptyEntries).Select(l => l.TrimEnd('\r')))
                 {
-                    Logger.LogError($"        {line}");
+                    Logger.LogMessage($"        {line}");
                 }
                 Logger.LogMessage(string.Empty);
                 Logger.LogMessage($"    TREATMENT");
