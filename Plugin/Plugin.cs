@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Bootstrap;
+using Mono.Cecil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -182,6 +183,18 @@ public class Plugin : BaseUnityPlugin
             var references = WalkReferences(assembly).ToLookup(reference => StaticAssemblies.Any(assembly => AssemblyName.ReferenceMatchesDefinition(reference, assembly.GetName())));
             var loadedReferences = references[true];
             var missingReferences = references[false];
+            var referencesWithMissingTypeReferences = missingReferences.Any()
+                ? loadedReferences
+                    .SelectMany(reference => StaticAssemblies.Where(assembly => AssemblyName.ReferenceMatchesDefinition(reference, assembly.GetName())))
+                    .Concat([assembly])
+                    .Where(assembly => !string.IsNullOrEmpty(assembly?.Location))
+                    .SelectMany(assembly => AssemblyDefinition.ReadAssembly(assembly.Location).Modules)
+                    .SelectMany(module => module.GetTypeReferences())
+                    .Distinct()
+                    .Where(typeReference => typeReference.Scope.MetadataScopeType == MetadataScopeType.AssemblyNameReference)
+                    .Select(typeReference => missingReferences.SingleOrDefault(r => AssemblyName.ReferenceMatchesDefinition(r, new(typeReference.Scope.ToString()))))
+                    .Where(assemblyName => assemblyName is not null)
+                : [];
 
             foreach (var plugin in entry.Value)
             {
@@ -192,11 +205,11 @@ public class Plugin : BaseUnityPlugin
                     (suspiciousPlugins_TargetsWrongBepInExVersion ??= []).Add(plugin, targetVersion);
                 }
 
-                if (missingReferences.Any())
-                {   // plugin has missing assembly references, probably the developer forgot to mark a plugin as a dependency
+                if (referencesWithMissingTypeReferences.Any())
+                {   // plugin has missing type references, probably the developer forgot to mark a plugin as a dependency
                     // might not have prevented the plugin from loading outright though - user should check if it seems to be working
 
-                    (suspiciousPlugins_MissingReferences ??= []).Add(plugin, missingReferences);
+                    (suspiciousPlugins_MissingReferences ??= []).Add(plugin, referencesWithMissingTypeReferences);
                 }
 
                 if (!Chainloader.PluginInfos.ContainsKey(plugin.Metadata.GUID))
@@ -262,8 +275,8 @@ public class Plugin : BaseUnityPlugin
                             {   // seems like Unity failed to instantiate the plugin
                                 // check if we already found missing references for this plugin
 
-                                if (!missingReferences.Any())
-                                {   // looks like we failed to find missing references somehow
+                                if (!referencesWithMissingTypeReferences.Any())
+                                {   // looks like we failed to find missing type references somehow
                                     // 
                                     // this might mean that the reference actually exists, but it wasn't loaded in the AppDomain yet
                                     // when BepInEx tried to load the plugin, i.e. because the mod dev forgot to put a BepInDependency attribute
