@@ -378,6 +378,8 @@ public class Plugin : BaseUnityPlugin
         Logger.LogMessage("  PLUGINS SKIPPED BY BEPINEX");
         Logger.LogMessage(string.Empty);
 
+        if (SkippedPlugins.Any())
+        {
         foreach (var pluginInfo in SkippedPlugins)
         {
             Logger.LogMessage($"  - {pluginInfo.Metadata.Name}");
@@ -476,10 +478,18 @@ public class Plugin : BaseUnityPlugin
 
             Logger.LogMessage(string.Empty);
         }
+        }
+        else
+        {
+            Logger.LogMessage("    None");
+            Logger.LogMessage(string.Empty);
+        }
 
         Logger.LogMessage("  PLUGINS WHICH FAILED TO INITIALISE");
         Logger.LogMessage(string.Empty);
 
+        if (FailedPlugins.Any())
+        {
         foreach (var pluginInfo in FailedPlugins)
         {
             Logger.LogMessage($"  - {pluginInfo.Metadata.Name}");
@@ -579,9 +589,18 @@ public class Plugin : BaseUnityPlugin
 
             Logger.LogMessage(string.Empty);
         }
+        }
+        else
+        {
+            Logger.LogMessage("    None");
+            Logger.LogMessage(string.Empty);
+        }
 
         Logger.LogMessage("  PLUGINS WITH POTENTIAL ISSUES");
         Logger.LogMessage(string.Empty);
+
+        if (SuspiciousPlugins.Any())
+        {
 
         foreach (var pluginInfo in SuspiciousPlugins)
         {
@@ -649,16 +668,30 @@ public class Plugin : BaseUnityPlugin
 
             Logger.LogMessage(string.Empty);
         }
+        }
+        else
+        {
+            Logger.LogMessage("    None");
+            Logger.LogMessage(string.Empty);
+        }
 
         Logger.LogMessage("  PLUGINS WITH NO DETECTED ISSUES");
         Logger.LogMessage(string.Empty);
 
+        if (AsymptomaticPlugins.Any())
+        {
         foreach (var pluginInfo in AsymptomaticPlugins)
         {
             Logger.LogMessage($"  - {pluginInfo.Metadata.Name}");
             Logger.LogMessage($"      guid:     {pluginInfo.Metadata.GUID}");
             Logger.LogMessage($"      version:  {pluginInfo.Metadata.Version}");
             Logger.LogMessage($"      filename: {Path.GetFileName(GetPluginLocation(pluginInfo))}");
+            Logger.LogMessage(string.Empty);
+        }
+        }
+        else
+        {
+            Logger.LogMessage("    None");
             Logger.LogMessage(string.Empty);
         }
 
