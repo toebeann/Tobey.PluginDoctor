@@ -194,6 +194,7 @@ public class Plugin : BaseUnityPlugin
                     .Where(typeReference => typeReference.Scope.MetadataScopeType == MetadataScopeType.AssemblyNameReference)
                     .Select(typeReference => missingReferences.SingleOrDefault(r => AssemblyName.ReferenceMatchesDefinition(r, new(typeReference.Scope.ToString()))))
                     .Where(assemblyName => assemblyName is not null)
+                    .Distinct()
                 : [];
 
             foreach (var plugin in entry.Value)
@@ -515,7 +516,7 @@ public class Plugin : BaseUnityPlugin
                 if (FailedPlugins_MissingReferences.TryGetValue(pluginInfo, out var missingReferences))
                 {
                     Logger.LogMessage(string.Empty);
-                    Logger.LogError($"      plugin has missing assembly references:");
+                    Logger.LogError($"      plugin references types from missing assembly references:");
                     Logger.LogMessage(string.Empty);
                     foreach (var missingReference in missingReferences)
                     {
