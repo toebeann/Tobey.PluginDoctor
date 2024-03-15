@@ -130,7 +130,7 @@ public class Plugin : BaseUnityPlugin
 
         Logger.LogMessage("The Doctor is in.");
 
-        PerformCheckup();
+        CheckupAndReport();
     }
 
     private BepInEx.PluginInfo GetLoadedPluginInfo(BepInEx.PluginInfo pluginInfo) =>
@@ -155,7 +155,7 @@ public class Plugin : BaseUnityPlugin
             cacheName: "chainloader" // use the same cache as BepInEx chainloader for performance
         );
 
-    public void PerformCheckup()
+    public void CheckupAndReport()
     {
         Reset();
 
@@ -163,12 +163,12 @@ public class Plugin : BaseUnityPlugin
 
         ThreadingHelper.Instance.StartAsyncInvoke(() =>
         {
-            performCheckup();
+            Checkup();
             return HandleDiagnosis;
         });
     }
 
-    private void performCheckup()
+    private void Checkup()
     {
         chainloaderInputPlugins = GetChainloaderInputPlugins();
 
