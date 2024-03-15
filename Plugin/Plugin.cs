@@ -393,104 +393,104 @@ public class Plugin : BaseUnityPlugin
 
         if (SkippedPlugins.Any())
         {
-        foreach (var pluginInfo in SkippedPlugins)
-        {
-            Logger.LogMessage($"  - {pluginInfo.Metadata.Name}");
-            Logger.LogMessage($"      guid:     {pluginInfo.Metadata.GUID}");
-            Logger.LogMessage($"      version:  {pluginInfo.Metadata.Version}");
-            Logger.LogMessage($"      filename: {Path.GetFileName(GetPluginLocation(pluginInfo))}");
-            Logger.LogMessage(string.Empty);
-            Logger.LogMessage($"    SYMPTOMS");
-
-            if (skippedPlugins_ProcessMismatch?.TryGetValue(pluginInfo, out var processes) ?? false)
+            foreach (var pluginInfo in SkippedPlugins)
             {
+                Logger.LogMessage($"  - {pluginInfo.Metadata.Name}");
+                Logger.LogMessage($"      guid:     {pluginInfo.Metadata.GUID}");
+                Logger.LogMessage($"      version:  {pluginInfo.Metadata.Version}");
+                Logger.LogMessage($"      filename: {Path.GetFileName(GetPluginLocation(pluginInfo))}");
                 Logger.LogMessage(string.Empty);
-                Logger.LogError($"      plugin requires game process to match at least one of the");
-                Logger.LogError($"      following filters:");
-                Logger.LogMessage(string.Empty);
-                foreach (var process in processes)
+                Logger.LogMessage($"    SYMPTOMS");
+
+                if (skippedPlugins_ProcessMismatch?.TryGetValue(pluginInfo, out var processes) ?? false)
                 {
-                    Logger.LogMessage($"      - {process.ProcessName}");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogError($"      plugin requires game process to match at least one of the");
+                    Logger.LogError($"      following filters:");
+                    Logger.LogMessage(string.Empty);
+                    foreach (var process in processes)
+                    {
+                        Logger.LogMessage($"      - {process.ProcessName}");
+                    }
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      \"{Paths.ProcessName}\" does not match this requirement.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"    TREATMENT");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient should make sure the plugin is intended to be used");
+                    Logger.LogMessage($"      with this game, and reach out to the developer of the");
+                    Logger.LogMessage($"      plugin and kindly ask them to address the issue.");
                 }
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      \"{Paths.ProcessName}\" does not match this requirement.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"    TREATMENT");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient should make sure the plugin is intended to be used");
-                Logger.LogMessage($"      with this game, and reach out to the developer of the");
-                Logger.LogMessage($"      plugin and kindly ask them to address the issue.");
-            }
 
-            if (skippedPlugins_IncompatibilitiesPresent?.TryGetValue(pluginInfo, out var incompatibilities) ?? false)
-            {
-                Logger.LogMessage(string.Empty);
-                Logger.LogError($"      plugin is marked as incompatible with the following:");
-                Logger.LogMessage(string.Empty);
-                foreach (var incompatibility in incompatibilities)
+                if (skippedPlugins_IncompatibilitiesPresent?.TryGetValue(pluginInfo, out var incompatibilities) ?? false)
                 {
-                    Logger.LogMessage($"      - {incompatibility.Metadata.Name} [{incompatibility.Metadata.GUID}]");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogError($"      plugin is marked as incompatible with the following:");
+                    Logger.LogMessage(string.Empty);
+                    foreach (var incompatibility in incompatibilities)
+                    {
+                        Logger.LogMessage($"      - {incompatibility.Metadata.Name} [{incompatibility.Metadata.GUID}]");
+                    }
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"    TREATMENT");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient will need to choose which is more important,");
+                    Logger.LogMessage($"      {pluginInfo.Metadata.Name}, or");
+                    Logger.LogMessage($"      the above list, and delete the other(s).");
                 }
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"    TREATMENT");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient will need to choose which is more important,");
-                Logger.LogMessage($"      {pluginInfo.Metadata.Name}, or");
-                Logger.LogMessage($"      the above list, and delete the other(s).");
-            }
 
-            if (skippedPlugins_MissingDependencies?.TryGetValue(pluginInfo, out var missingDependencies) ?? false)
-            {
-                Logger.LogMessage(string.Empty);
-                Logger.LogError($"      plugin requires the following plugins which were not found:");
-                Logger.LogMessage(string.Empty);
-                foreach (var missingDependency in missingDependencies)
+                if (skippedPlugins_MissingDependencies?.TryGetValue(pluginInfo, out var missingDependencies) ?? false)
                 {
-                    Logger.LogMessage($"      - {missingDependency.DependencyGUID}{(missingDependency.MinimumVersion?.Equals(EmptyVersion) ?? true ? string.Empty : $" [>= {missingDependency.MinimumVersion}]")}");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogError($"      plugin requires the following plugins which were not found:");
+                    Logger.LogMessage(string.Empty);
+                    foreach (var missingDependency in missingDependencies)
+                    {
+                        Logger.LogMessage($"      - {missingDependency.DependencyGUID}{(missingDependency.MinimumVersion?.Equals(EmptyVersion) ?? true ? string.Empty : $" [>= {missingDependency.MinimumVersion}]")}");
+                    }
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"    TREATMENT");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient should check the documentation of the plugin for");
+                    Logger.LogMessage($"      information on its requirements and where to obtain them,");
+                    Logger.LogMessage($"      and install them.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient is advised to consult with the developer of the");
+                    Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
                 }
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"    TREATMENT");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient should check the documentation of the plugin for");
-                Logger.LogMessage($"      information on its requirements and where to obtain them,");
-                Logger.LogMessage($"      and install them.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient is advised to consult with the developer of the");
-                Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
-            }
 
-            if (skippedPlugins_SkippedDependencies?.TryGetValue(pluginInfo, out var skippedDependencies) ?? false)
-            {
-                Logger.LogMessage(string.Empty);
-                Logger.LogError($"      plugin requires the following plugins which were skipped:");
-                Logger.LogMessage(string.Empty);
-                foreach (var skippedDependency in skippedDependencies)
+                if (skippedPlugins_SkippedDependencies?.TryGetValue(pluginInfo, out var skippedDependencies) ?? false)
                 {
-                    Logger.LogMessage($"      - {skippedDependency.Metadata.Name} [{skippedDependency.Metadata.GUID}]");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogError($"      plugin requires the following plugins which were skipped:");
+                    Logger.LogMessage(string.Empty);
+                    foreach (var skippedDependency in skippedDependencies)
+                    {
+                        Logger.LogMessage($"      - {skippedDependency.Metadata.Name} [{skippedDependency.Metadata.GUID}]");
+                    }
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"    TREATMENT");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient should follow the treatment plan(s) for the above");
+                    Logger.LogMessage($"      listed plugins.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient is advised to consult with the developer of the");
+                    Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
                 }
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"    TREATMENT");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient should follow the treatment plan(s) for the above");
-                Logger.LogMessage($"      listed plugins.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient is advised to consult with the developer of the");
-                Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
-            }
 
-            if (skippedPlugins_ReasonsUnknown?.Contains(pluginInfo) ?? false)
-            {
-                Logger.LogMessage(string.Empty);
-                Logger.LogError($"      plugin was skipped for unknown reasons.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"    TREATMENT");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient should consult with the developer of the plugin");
-                Logger.LogMessage($"      and/or the modding community.");
-            }
+                if (skippedPlugins_ReasonsUnknown?.Contains(pluginInfo) ?? false)
+                {
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogError($"      plugin was skipped for unknown reasons.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"    TREATMENT");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient should consult with the developer of the plugin");
+                    Logger.LogMessage($"      and/or the modding community.");
+                }
 
-            Logger.LogMessage(string.Empty);
-        }
+                Logger.LogMessage(string.Empty);
+            }
         }
         else
         {
@@ -503,105 +503,105 @@ public class Plugin : BaseUnityPlugin
 
         if (FailedPlugins.Any())
         {
-        foreach (var pluginInfo in FailedPlugins)
-        {
-            Logger.LogMessage($"  - {pluginInfo.Metadata.Name}");
-            Logger.LogMessage($"      guid:     {pluginInfo.Metadata.GUID}");
-            Logger.LogMessage($"      version:  {pluginInfo.Metadata.Version}");
-            Logger.LogMessage($"      filename: {Path.GetFileName(GetPluginLocation(pluginInfo))}");
-            Logger.LogMessage(string.Empty);
-            Logger.LogMessage($"    SYMPTOMS");
-
-            if (FailedPlugins_MissingReferences.TryGetValue(pluginInfo, out var missingReferences))
+            foreach (var pluginInfo in FailedPlugins)
             {
+                Logger.LogMessage($"  - {pluginInfo.Metadata.Name}");
+                Logger.LogMessage($"      guid:     {pluginInfo.Metadata.GUID}");
+                Logger.LogMessage($"      version:  {pluginInfo.Metadata.Version}");
+                Logger.LogMessage($"      filename: {Path.GetFileName(GetPluginLocation(pluginInfo))}");
                 Logger.LogMessage(string.Empty);
-                Logger.LogError($"      plugin has missing assembly references:");
-                Logger.LogMessage(string.Empty);
-                foreach (var missingReference in missingReferences)
-                {
-                    Logger.LogMessage($"      - {missingReference.Name} {missingReference.Version}");
-                }
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"    TREATMENT");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient should check the documentation of the plugin for");
-                Logger.LogMessage($"      information on its requirements and where to obtain them,");
-                Logger.LogMessage($"      and install them.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      additionally, patient is advised to reach out to the");
-                Logger.LogMessage($"      developer of the plugin and inform them that their plugin");
-                Logger.LogMessage($"      may be missing BepInDependency attribute(s), which could");
-                Logger.LogMessage($"      cause load order issues.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient is advised to consult with the developer of the");
-                Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
-            }
+                Logger.LogMessage($"    SYMPTOMS");
 
-            if (failedPlugins_MissingBepInDependencyAttributes?.TryGetValue(pluginInfo, out var pluginsNeedingDependencyAttributes) ?? false)
-            {
-                Logger.LogMessage(string.Empty);
-                Logger.LogError($"      plugin was loaded before its following requirements:");
-                Logger.LogMessage(string.Empty);
-                foreach (var pluginNeedingDependencyAttribute in pluginsNeedingDependencyAttributes)
+                if (FailedPlugins_MissingReferences.TryGetValue(pluginInfo, out var missingReferences))
                 {
-                    Logger.LogMessage($"      - {pluginNeedingDependencyAttribute.Metadata.Name} [{pluginNeedingDependencyAttribute.Metadata.GUID}]");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogError($"      plugin has missing assembly references:");
+                    Logger.LogMessage(string.Empty);
+                    foreach (var missingReference in missingReferences)
+                    {
+                        Logger.LogMessage($"      - {missingReference.Name} {missingReference.Version}");
+                    }
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"    TREATMENT");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient should check the documentation of the plugin for");
+                    Logger.LogMessage($"      information on its requirements and where to obtain them,");
+                    Logger.LogMessage($"      and install them.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      additionally, patient is advised to reach out to the");
+                    Logger.LogMessage($"      developer of the plugin and inform them that their plugin");
+                    Logger.LogMessage($"      may be missing BepInDependency attribute(s), which could");
+                    Logger.LogMessage($"      cause load order issues.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient is advised to consult with the developer of the");
+                    Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
                 }
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"    TREATMENT");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient should reach out to the developer of the plugin");
-                Logger.LogMessage($"      and kindly ask them to add BepInDependency attribute(s) to");
-                Logger.LogMessage($"      the plugin's BaseUnityPlugin class with the above listed");
-                Logger.LogMessage($"      plugin GUID(s).");
-            }
 
-            if (failedPlugins_ThrewInInit?.TryGetValue(pluginInfo, out var data) ?? false)
-            {
-                Logger.LogMessage(string.Empty);
-                Logger.LogError($"      plugin threw an Exception during initialisation with the");
-                Logger.LogError($"      following data:");
-                Logger.LogMessage(string.Empty);
-                foreach (var line in data.ToString().Trim().Split(['\n'], StringSplitOptions.RemoveEmptyEntries).Select(l => l.TrimEnd('\r')))
+                if (failedPlugins_MissingBepInDependencyAttributes?.TryGetValue(pluginInfo, out var pluginsNeedingDependencyAttributes) ?? false)
                 {
-                    Logger.LogMessage($"        {line}");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogError($"      plugin was loaded before its following requirements:");
+                    Logger.LogMessage(string.Empty);
+                    foreach (var pluginNeedingDependencyAttribute in pluginsNeedingDependencyAttributes)
+                    {
+                        Logger.LogMessage($"      - {pluginNeedingDependencyAttribute.Metadata.Name} [{pluginNeedingDependencyAttribute.Metadata.GUID}]");
+                    }
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"    TREATMENT");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient should reach out to the developer of the plugin");
+                    Logger.LogMessage($"      and kindly ask them to add BepInDependency attribute(s) to");
+                    Logger.LogMessage($"      the plugin's BaseUnityPlugin class with the above listed");
+                    Logger.LogMessage($"      plugin GUID(s).");
                 }
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"    TREATMENT");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      this symptom could indicate that the plugin is");
-                Logger.LogMessage($"      incompatible with the current version of the game.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient should check the documentation of the plugin for");
-                Logger.LogMessage($"      indications of whether the plugin is intended for use on a");
-                Logger.LogMessage($"      specific version of the game, and if so, patient should");
-                Logger.LogMessage($"      consult with the developer of the plugin and/or the");
-                Logger.LogMessage($"      modding community for advice on how to resolve this.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      otherwise, symptom may indicate that the plugin has a bug.");
-                Logger.LogMessage($"      patient should consult with the developer of the plugin");
-                Logger.LogMessage($"      and kindly ask them to address the issue.");
-            }
 
-            if (failedPlugins_CouldNotBeInstantiated?.TryGetValue(pluginInfo, out data) ?? false)
-            {
-                Logger.LogMessage(string.Empty);
-                Logger.LogError($"      plugin could not be instantiated by Unity, with the");
-                Logger.LogError($"      following data:");
-                Logger.LogError($"        ");
-                Logger.LogMessage(string.Empty);
-                foreach (var line in data.ToString().Trim().Split(['\n'], StringSplitOptions.RemoveEmptyEntries).Select(l => l.TrimEnd('\r')))
+                if (failedPlugins_ThrewInInit?.TryGetValue(pluginInfo, out var data) ?? false)
                 {
-                    Logger.LogMessage($"        {line}");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogError($"      plugin threw an Exception during initialisation with the");
+                    Logger.LogError($"      following data:");
+                    Logger.LogMessage(string.Empty);
+                    foreach (var line in data.ToString().Trim().Split(['\n'], StringSplitOptions.RemoveEmptyEntries).Select(l => l.TrimEnd('\r')))
+                    {
+                        Logger.LogMessage($"        {line}");
+                    }
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"    TREATMENT");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      this symptom could indicate that the plugin is");
+                    Logger.LogMessage($"      incompatible with the current version of the game.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient should check the documentation of the plugin for");
+                    Logger.LogMessage($"      indications of whether the plugin is intended for use on a");
+                    Logger.LogMessage($"      specific version of the game, and if so, patient should");
+                    Logger.LogMessage($"      consult with the developer of the plugin and/or the");
+                    Logger.LogMessage($"      modding community for advice on how to resolve this.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      otherwise, symptom may indicate that the plugin has a bug.");
+                    Logger.LogMessage($"      patient should consult with the developer of the plugin");
+                    Logger.LogMessage($"      and kindly ask them to address the issue.");
                 }
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"    TREATMENT");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient should consult with the developer of the plugin");
-                Logger.LogMessage($"      and kindly ask them to address the issue.");
-            }
 
-            Logger.LogMessage(string.Empty);
-        }
+                if (failedPlugins_CouldNotBeInstantiated?.TryGetValue(pluginInfo, out data) ?? false)
+                {
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogError($"      plugin could not be instantiated by Unity, with the");
+                    Logger.LogError($"      following data:");
+                    Logger.LogError($"        ");
+                    Logger.LogMessage(string.Empty);
+                    foreach (var line in data.ToString().Trim().Split(['\n'], StringSplitOptions.RemoveEmptyEntries).Select(l => l.TrimEnd('\r')))
+                    {
+                        Logger.LogMessage($"        {line}");
+                    }
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"    TREATMENT");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient should consult with the developer of the plugin");
+                    Logger.LogMessage($"      and kindly ask them to address the issue.");
+                }
+
+                Logger.LogMessage(string.Empty);
+            }
         }
         else
         {
@@ -615,72 +615,73 @@ public class Plugin : BaseUnityPlugin
         if (SuspiciousPlugins.Any())
         {
 
-        foreach (var pluginInfo in SuspiciousPlugins)
-        {
-            Logger.LogMessage($"  - {pluginInfo.Metadata.Name}");
-            Logger.LogMessage($"      guid:     {pluginInfo.Metadata.GUID}");
-            Logger.LogMessage($"      version:  {pluginInfo.Metadata.Version}");
-            Logger.LogMessage($"      filename: {Path.GetFileName(GetPluginLocation(pluginInfo))}");
-            Logger.LogMessage(string.Empty);
-            Logger.LogMessage($"    SYMPTOMS");
-
-            if (SuspiciousPlugins_MissingReferences.TryGetValue(pluginInfo, out var missingReferences))
+            foreach (var pluginInfo in SuspiciousPlugins)
             {
+                Logger.LogMessage($"  - {pluginInfo.Metadata.Name}");
+                Logger.LogMessage($"      guid:     {pluginInfo.Metadata.GUID}");
+                Logger.LogMessage($"      version:  {pluginInfo.Metadata.Version}");
+                Logger.LogMessage($"      filename: {Path.GetFileName(GetPluginLocation(pluginInfo))}");
                 Logger.LogMessage(string.Empty);
-                Logger.LogWarning($"      plugin has missing assembly references:");
-                Logger.LogMessage(string.Empty);
-                foreach (var missingReference in missingReferences)
+                Logger.LogMessage($"    SYMPTOMS");
+
+                if (SuspiciousPlugins_MissingReferences.TryGetValue(pluginInfo, out var missingReferences))
                 {
-                    Logger.LogMessage($"      - {missingReference.Name} {missingReference.Version}");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogWarning($"      plugin references types from missing assembly references:");
+                    Logger.LogMessage(string.Empty);
+                    foreach (var missingReference in missingReferences)
+                    {
+                        Logger.LogMessage($"      - {missingReference.Name} {missingReference.Version}");
+                    }
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      this might mean the game or game version is incompatible,");
+                    Logger.LogMessage($"      it could be indicative of missing or late-loading");
+                    Logger.LogMessage($"      requirements, or the missing references could simply be");
+                    Logger.LogMessage($"      optional dependencies.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"    ADVISEMENT");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient should check the documentation of the plugin for");
+                    Logger.LogMessage($"      indications of whether the plugin is intended for use on a");
+                    Logger.LogMessage($"      specific version of the game, and if so, patient should");
+                    Logger.LogMessage($"      consult with the developer of the plugin and/or the");
+                    Logger.LogMessage($"      modding community for advice on how to resolve this.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      otherwise, patient is advised to check the documentation");
+                    Logger.LogMessage($"      of the plugin for its requirements and optional");
+                    Logger.LogMessage($"      dependencies and where to obtain them, and install them.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient is advised to consult with the developer of the");
+                    Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
                 }
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      this might mean the game or game version is incompatible,");
-                Logger.LogMessage($"      it could be indicative of missing requirements, or the");
-                Logger.LogMessage($"      missing references could simply be optional dependencies.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"    ADVISEMENT");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient should check the documentation of the plugin for");
-                Logger.LogMessage($"      indications of whether the plugin is intended for use on a");
-                Logger.LogMessage($"      specific version of the game, and if so, patient should");
-                Logger.LogMessage($"      consult with the developer of the plugin and/or the");
-                Logger.LogMessage($"      modding community for advice on how to resolve this.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      otherwise, patient is advised to check the documentation");
-                Logger.LogMessage($"      of the plugin for its requirements and optional");
-                Logger.LogMessage($"      dependencies and where to obtain them, and install them.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient is advised to consult with the developer of the");
-                Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
-            }
 
-            if (suspiciousPlugins_TargetsWrongBepInExVersion?.TryGetValue(pluginInfo, out var targetVersion) ?? false)
-            {
-                Logger.LogMessage(string.Empty);
-                Logger.LogWarning($"      plugin targets a potentially incompatible BepInEx version:");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"        expected:  {targetVersion}");
-                Logger.LogMessage($"        installed: {BepInExVersion}");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"    ADVISEMENT");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient is advised that unless the plugin is not");
-                Logger.LogMessage($"      functioning as expected, they can safely ignore this");
-                Logger.LogMessage($"      symptom.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      if there are other relevant symptoms for this plugin,");
-                Logger.LogMessage($"      patient is advised to follow their relevant treatments or");
-                Logger.LogMessage($"      advisements and ignore this symptom.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      otherwise, patient should update either the plugin or");
-                Logger.LogMessage($"      their BepInEx installation as applicable.");
-                Logger.LogMessage(string.Empty);
-                Logger.LogMessage($"      patient is advised to consult with the developer of the");
-                Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
-            }
+                if (suspiciousPlugins_TargetsWrongBepInExVersion?.TryGetValue(pluginInfo, out var targetVersion) ?? false)
+                {
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogWarning($"      plugin targets a potentially incompatible BepInEx version:");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"        expected:  {targetVersion}");
+                    Logger.LogMessage($"        installed: {BepInExVersion}");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"    ADVISEMENT");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient is advised that unless the plugin is not");
+                    Logger.LogMessage($"      functioning as expected, they can safely ignore this");
+                    Logger.LogMessage($"      symptom.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      if there are other relevant symptoms for this plugin,");
+                    Logger.LogMessage($"      patient is advised to follow their relevant treatments or");
+                    Logger.LogMessage($"      advisements and ignore this symptom.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      otherwise, patient should update either the plugin or");
+                    Logger.LogMessage($"      their BepInEx installation as applicable.");
+                    Logger.LogMessage(string.Empty);
+                    Logger.LogMessage($"      patient is advised to consult with the developer of the");
+                    Logger.LogMessage($"      plugin and/or the modding community if symptoms persist.");
+                }
 
-            Logger.LogMessage(string.Empty);
-        }
+                Logger.LogMessage(string.Empty);
+            }
         }
         else
         {
@@ -693,14 +694,14 @@ public class Plugin : BaseUnityPlugin
 
         if (AsymptomaticPlugins.Any())
         {
-        foreach (var pluginInfo in AsymptomaticPlugins)
-        {
-            Logger.LogMessage($"  - {pluginInfo.Metadata.Name}");
-            Logger.LogMessage($"      guid:     {pluginInfo.Metadata.GUID}");
-            Logger.LogMessage($"      version:  {pluginInfo.Metadata.Version}");
-            Logger.LogMessage($"      filename: {Path.GetFileName(GetPluginLocation(pluginInfo))}");
-            Logger.LogMessage(string.Empty);
-        }
+            foreach (var pluginInfo in AsymptomaticPlugins)
+            {
+                Logger.LogMessage($"  - {pluginInfo.Metadata.Name}");
+                Logger.LogMessage($"      guid:     {pluginInfo.Metadata.GUID}");
+                Logger.LogMessage($"      version:  {pluginInfo.Metadata.Version}");
+                Logger.LogMessage($"      filename: {Path.GetFileName(GetPluginLocation(pluginInfo))}");
+                Logger.LogMessage(string.Empty);
+            }
         }
         else
         {
