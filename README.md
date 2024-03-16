@@ -16,10 +16,10 @@ Plugin Doctor can diagnose and advise how to treat (and when to ignore) the foll
     -   the plugin was otherwise skipped
 -   plugins which failed during initialisation:
     -   the plugin was loaded before its requirements
-    -   the plugin references assemblies which were not found
+    -   the plugin references types from assemblies which were not found
     -   the plugin otherwise failed during initialisation
 -   plugins with potential issues:
-    -   the plugin references assemblies which were not found, but did not fail during initialisation
+    -   the plugin references types from assemblies which were not found, but did not fail during initialisation
     -   the plugin targets a potentially incompatible version of BepInEx
 
 In the future, it is planned for Plugin Doctor to offer to treat some of these symptoms itself, where possible.
